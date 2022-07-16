@@ -1,4 +1,6 @@
+const PHONE_NUMBER = '6281234123412'
 const PRODUCT_ON_CART = []
+let TOTAL_PRICE = 0
 
 //Cart
 const cartIcon = document.querySelector('#cart-icon')
@@ -49,7 +51,9 @@ function ready() {
 
 //buy button
 function buyButtonClicked() {
-  alert('Your Order is placed')
+  if (PRODUCT_ON_CART.length < 1) return 
+
+  alert("Pesanan telah dibuat")
   const cartContent = document.getElementsByClassName('cart-content')[0]
   // clear all product in cart
   for (let i = 0; i < cartContent.childElementCount; i++) {
@@ -147,8 +151,10 @@ function updateTotal() {
 
   //Desimal
   total = Math.round(total * 100)/100
+  TOTAL_PRICE = total
 
   const cartCount = document.getElementsByClassName('cart-count')[0]
   cartCount.innerText = cartBoxes.length
   document.getElementsByClassName('total-price')[0].innerText = 'Rp ' + total.toLocaleString()
 }
+
