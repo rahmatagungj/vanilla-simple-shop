@@ -273,3 +273,19 @@ header {
   }
 }
 
+.cart-detail {
+  position: relative;
+}
+
+span.cart-count {
+    position: absolute;
+    left: -8px;
+    bottom: -2px;
+    background: red;
+    border-radius: 100%;
+    margin: 0;
+    padding: 0px 6px;
+    font-weight: 600;
+    color: white;
+    font-size: 13px;
+}

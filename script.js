@@ -148,5 +148,7 @@ function updateTotal() {
   //Desimal
   total = Math.round(total * 100)/100
 
+  const cartCount = document.getElementsByClassName('cart-count')[0]
+  cartCount.innerText = cartBoxes.length
   document.getElementsByClassName('total-price')[0].innerText = 'Rp ' + total.toLocaleString()
 }
