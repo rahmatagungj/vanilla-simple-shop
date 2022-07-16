@@ -1,4 +1,3 @@
-const PHONE_NUMBER = '6281234123412'
 const PRODUCT_ON_CART = []
 let TOTAL_PRICE = 0
 
