@@ -1,3 +1,5 @@
+const PRODUCT_ON_CART = []
+
 //Cart
 const cartIcon = document.querySelector('#cart-icon')
 const cart = document.querySelector('.cart')
@@ -49,7 +51,6 @@ function ready() {
 function buyButtonClicked() {
   alert('Your Order is placed')
   const cartContent = document.getElementsByClassName('cart-content')[0]
-  console.log(cartContent)
   // clear all product in cart
   for (let i = 0; i < cartContent.childElementCount; i++) {
     cartContent.removeChild(cartContent.firstChild)
@@ -79,10 +80,18 @@ function addProductToCart(item, price, image) {
       const quantityElement = cartItem.getElementsByClassName('cart-quantity')[i]
       const quantity = quantityElement.value;
       quantityElement.value = parseInt(quantity) + 1
+      const index = PRODUCT_ON_CART.findIndex(items => items.name === item)
+      PRODUCT_ON_CART[index].quantity = parseInt(quantity) + 1
       updateTotal()
       return
     }
   }
+
+  PRODUCT_ON_CART.push({
+    name: item,
+    price: price,
+    quantity: 1,
+  })
   const cartBoxContent = `<img src="${image}" alt="" class="cart-img">
                             <div class="detail-box">
                                 <div class="cart-product-title">${item}</div>
@@ -103,8 +112,11 @@ function addProductToCart(item, price, image) {
 //Quantity change
 function quantityChanged(event) {
   const input = event.target
+  const index = PRODUCT_ON_CART.findIndex(items => items.name === input.parentElement.getElementsByClassName('cart-product-title')[0].innerText)
+  PRODUCT_ON_CART[index].quantity = input.value
   if (isNaN(input.value) || input.value <= 0) {
     input.value = 1
+    PRODUCT_ON_CART[index].quantity = 1
   }
   updateTotal()
 }
@@ -113,6 +125,8 @@ function quantityChanged(event) {
 function removeCartItem(event) {
   const buttonClicked = event.target
   buttonClicked.parentElement.remove()
+  const index = PRODUCT_ON_CART.findIndex(items => items.name === buttonClicked.parentElement.getElementsByClassName('cart-product-title')[0].innerText)
+  PRODUCT_ON_CART.splice(index, 1)
   updateTotal()
 }
 
